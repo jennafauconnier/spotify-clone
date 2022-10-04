@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import styled from 'styled-components'
 import { useStateProvider } from "../utils/StateProvider"
 import axios from "axios"
 import { reducerCases } from '../utils/Constants'
@@ -18,7 +19,7 @@ export default function Playlists() {
                 },
             })
             const { items } = response.data
-            const playlists = items.map(({ name, id, owner }) => {
+            const playlists = items.map(({ name, id }) => {
                 return { name, id }
             })
             dispatch({ type:reducerCases.SET_PLAYLISTS, playlists })
@@ -26,14 +27,50 @@ export default function Playlists() {
         getPlaylistData()
     }, [token, dispatch])
   return (
-    <div>
+    <Container>
         <ul>
             {playlists.map(({ name, id }) => {
                 return(
                     <li key={id}>{name}</li>
                 )
             })}
+            {playlists.map(({ name, id }) => {
+                return(
+                    <li key={id}>{name}</li>
+                )
+            })}
         </ul>
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+    height: 100%;
+    overflow: hidden;
+    ul {
+        list-type-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        height: 55vh;
+        max-height: 100%;
+        overflow: auto;
+        &::-webkit-scrollbar {
+            &-thumb {
+                background-color: rgba(255, 255, 255, 0.6)
+            }
+        }
+
+        li {
+        display: flex; 
+        gap: 1rem;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+            color: white
+        }
+        }
+    }
+`
