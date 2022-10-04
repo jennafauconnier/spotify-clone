@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useStateProvider } from "../utils/StateProvider"
 import axios from "axios"
+import { reducerCases } from '../utils/Constants'
 
 export default function Playlists() {
     // I destructur the token from the state
     // I need the token & dispatch 
-    const [{token, dispatch}] = useStateProvider()
+    const [{token, playlists}, dispatch] = useStateProvider()
 
     // I pass the token here in the token to make my API call. 
     useEffect(() => {
@@ -16,11 +17,23 @@ export default function Playlists() {
                     "Content-Type": "application/json"
                 },
             })
-            console.log("RES", response)
+            const { items } = response.data
+            const playlists = items.map(({ name, id, owner }) => {
+                return { name, id }
+            })
+            dispatch({ type:reducerCases.SET_PLAYLISTS, playlists })
         }
         getPlaylistData()
     }, [token, dispatch])
   return (
-    <div>Playlists</div>
+    <div>
+        <ul>
+            {playlists.map(({ name, id }) => {
+                return(
+                    <li key={id}>{name}</li>
+                )
+            })}
+        </ul>
+    </div>
   )
 }
