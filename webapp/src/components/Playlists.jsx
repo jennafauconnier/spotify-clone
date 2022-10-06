@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { useStateProvider } from "../utils/StateProvider"
 import axios from "axios"
+
+import { useStateProvider } from "../utils/StateProvider"
 import { reducerCases } from '../utils/Constants'
 
 export default function Playlists() {
@@ -34,11 +35,6 @@ export default function Playlists() {
                     <li key={id}>{name}</li>
                 )
             })}
-            {playlists.map(({ name, id }) => {
-                return(
-                    <li key={id}>{name}</li>
-                )
-            })}
         </ul>
     </Container>
   )
@@ -53,7 +49,7 @@ const Container = styled.div`
         flex-direction: column;
         gap: 1rem;
         padding: 1rem;
-        height: 55vh;
+        height: 52vh;
         max-height: 100%;
         overflow: auto;
         &::-webkit-scrollbar {
