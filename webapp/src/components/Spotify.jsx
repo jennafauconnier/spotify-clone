@@ -23,11 +23,15 @@ export default function Spotify() {
                     "Content-Type": "application/json"
                 },
             })
-            console.log('DATA', data)
+
+            console.log('DATAIMG',  data.images[0].url)
+
             const userInfo = {
                 userId : data.id,
-                username : data.display_name
+                username : data.display_name,
+                picture : data.images[0].url
             }
+
             dispatch({ type:reducerCases.SET_USER, userInfo })
         }
         

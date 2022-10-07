@@ -15,6 +15,7 @@ export default function Navbar() {
         <input type="text" placeholder="Artists, song, or podcasts" />
       </div>
       <div className="avatar">
+        <img src={userInfo?.picture} alt="profile picture" />
         <a href="#" >
           <CgProfile />
           <span>{userInfo?.username}</span>
@@ -25,5 +26,45 @@ export default function Navbar() {
 }
 
 const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  height: 15vh;
+  position: sticky;
+  top: 0;
+  transition 0.3s ease-in-out;
+  background-color: none;
 
+  .search_bar {
+    background-color: white;
+    width: 30%;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5 rem;
+
+    input {
+      border: none;
+      height: 2rem;
+      width: 100%;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .avatar {
+
+    img {
+      background-color: #242424;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      padding: 2px;
+    }
+  }
 `
