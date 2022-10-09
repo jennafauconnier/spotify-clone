@@ -17,7 +17,6 @@ export default function Navbar() {
       <div className="avatar">
         <img src={userInfo?.picture} alt="profile picture" />
         <a href="#" >
-          <CgProfile />
           <span>{userInfo?.username}</span>
         </a>
       </div>
@@ -57,6 +56,24 @@ const Container = styled.div`
   }
 
   .avatar {
+    display: flex;
+    align-items: center;
+    background-color: #242424;
+    padding: 0.3rem 0.4rem;
+    padding-right: 1rem;
+    border-radius: 2rem;
+
+    a {
+      text-decoration: none;
+
+      span {
+        padding-left: 1rem;
+        color: white;
+        outline: none;
+      }
+    }
+
+    
 
     img {
       background-color: #242424;
