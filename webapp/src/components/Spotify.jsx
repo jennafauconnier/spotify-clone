@@ -23,9 +23,6 @@ export default function Spotify() {
                     "Content-Type": "application/json"
                 },
             })
-
-            console.log('DATAIMG',  data.images[0].url)
-
             const userInfo = {
                 userId : data.id,
                 username : data.display_name,

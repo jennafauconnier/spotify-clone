@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { useStateProvider } from '../utils/StateProvider'
 
 import { FaSearch } from 'react-icons/fa'
-import { CgProfile } from 'react-icons/cg'
 
 export default function Navbar() {
   const [{ userInfo }] = useStateProvider()
@@ -15,7 +14,7 @@ export default function Navbar() {
         <input type="text" placeholder="Artists, song, or podcasts" />
       </div>
       <div className="avatar">
-        <img src={userInfo?.picture} alt="profile picture" />
+        <img src={userInfo?.picture} alt="profile pic" />
         <a href="#" >
           <span>{userInfo?.username}</span>
         </a>
