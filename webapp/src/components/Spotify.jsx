@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import { reducerCases } from '../utils/Constants'
 import { useStateProvider } from '../utils/StateProvider'
 import styled from 'styled-components'
@@ -13,6 +13,17 @@ import Footer from './Footer'
 
 export default function Spotify() {
     const [{token}, dispatch] = useStateProvider()
+    const [navBackground, setNavBackground] = useState(false);
+    const [headerBackground, setHeaderBackground] = useState(false);
+    const bodyRef = useRef();
+    const bodyScrolled = () => {
+      bodyRef.current.scrollTop >= 30
+        ? setNavBackground(true)
+        : setNavBackground(false);
+      bodyRef.current.scrollTop >= 268
+        ? setHeaderBackground(true)
+        : setHeaderBackground(false);
+    };
 
 
     useEffect(() => {
@@ -40,10 +51,10 @@ export default function Spotify() {
     <Container>
         <div className="spotify_body">
             <Sidebar />
-            <div className="body">
-                <Navbar />
+            <div className="body" ref={bodyRef} onScroll={bodyScrolled}>
+                <Navbar navBackground={navBackground} />
                 <div className="body_content">
-                    <Body />
+                    <Body headerBackground={headerBackground} />
                 </div>
             </div>
         </div>
@@ -74,6 +85,11 @@ const Container = styled.div`
             height: 100%;
             width: 100%;
             overflow: auto;
+            &::-webkit-scrollbar {
+                &-thumb {
+                    background-color: rgba(255, 255, 255, 0.6)
+                }
+            }
         }
     }
 

@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { AiFillClockCircle } from 'react-icons/ai'
 import axios from 'axios'
+import moment from 'moment'
 
 import { useStateProvider } from '../utils/StateProvider'
 import { reducerCases } from '../utils/Constants'
 
-export default function Body() {
+export default function Body({headerBackground}) {
   const [{ token, selectedPlaylistId, selectedPlaylist }, dispatch] = useStateProvider()
 
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function Body() {
   
 
   return (
-    <Container>
+    <Container headerBackground={headerBackground}>
       {
         selectedPlaylist && (
           <>
@@ -93,7 +94,9 @@ export default function Body() {
                         <span>{album}</span>
                       </div>
                       <div className="col">
-                        <span>{duration}</span>
+                        <span>
+                          {moment.utc(duration).format('m:ss')}
+                        </span>
                       </div>
                     </div>
                   )
@@ -133,7 +136,7 @@ const Container = styled.div`
   }
 }
 .list {
-  .header-row {
+  .header_row {
     display: grid;
     grid-template-columns: 0.3fr 3fr 2fr 0.1fr;
     margin: 1rem 0 0 0;
@@ -142,6 +145,8 @@ const Container = styled.div`
     top: 15vh;
     padding: 1rem 3rem;
     transition: 0.3s ease-in-out;
+    background-color: ${({ headerBackground }) =>
+        headerBackground ? "#000000dc" : "none"};
     
   }
   .tracks {
